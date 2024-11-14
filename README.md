@@ -1,4 +1,4 @@
-# Sentiment-Analysis-Using-RNN-IMDB-Dataset-
+#  Image Classification with CNN (CIFAR-10 Dataset)
 
 # Importing necessary libraries
 
