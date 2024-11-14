@@ -85,3 +85,37 @@ The first Dense layer has 128 neurons and uses the ReLU activation function.
 The final Dense layer has 10 neurons (corresponding to the 10 classes in CIFAR-10), with a softmax activation function to output a probability distribution over the 10 classes.
 
 Dropout: This layer randomly drops a percentage (50% in this case) of the neurons during training to prevent overfitting. It helps to generalize the model better.
+
+# Compiling the model
+
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+optimizer='adam': Adam is an adaptive learning rate optimization algorithm that computes adaptive learning rates for each parameter and helps in faster convergence.
+
+loss='categorical_crossentropy': This is the loss function used for multi-class classification problems. It measures how well the model's predictions match the actual labels.
+
+metrics=['accuracy']: This specifies that the model should report accuracy during training and evaluation.
+
+# Training the model
+
+model.fit(x_train, y_train, epochs=10, batch_size=64, validation_data=(x_test, y_test))
+
+x_train, y_train: The training data and labels.
+
+epochs=10: The model will train for 10 epochs (iterations through the entire training dataset).
+
+batch_size=64: The model will process 64 samples at a time before updating the weights.
+
+validation_data=(x_test, y_test): The model will also validate its performance on the test data after each epoch.
+
+# Evaluating the model
+
+test_loss, test_acc = model.evaluate(x_test, y_test, verbose=2)
+
+print(f"Test accuracy: {test_acc}")
+
+After training, the model is evaluated on the test data using the evaluate method, which computes the loss and accuracy of the model on the test set.
+
+test_loss: The loss on the test data.
+
+test_acc: The accuracy on the test data.
