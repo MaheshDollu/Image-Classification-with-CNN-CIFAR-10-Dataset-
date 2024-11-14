@@ -40,3 +40,38 @@ Normalization: The images' pixel values range from 0 to 255. Dividing them by 25
 
 
 One-hot encoding: The labels (which are integers from 0 to 9) are converted into one-hot encoded vectors, so each label will be represented as a 10-element vector where only the correct class is 1 and all others are 0 (e.g., class 0 would be [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]).
+
+# Building the CNN model
+
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
+    MaxPooling2D((2, 2)),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D((2, 2)),
+    Conv2D(128, (3, 3), activation='relu'),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dropout(0.5),
+    Dense(10, activation='softmax')  # 10 classes for CIFAR-10
+])
+Conv2D: This is a 2D convolutional layer. It learns filters (or kernels) that detect specific features (such as edges or textures) in the images.
+
+The first Conv2D layer has 32 filters of size 3x3, using the ReLU activation function. It expects input images of shape (32, 32, 3) (32x32 images with 3 color channels).
+
+The second Conv2D layer has 64 filters of size 3x3.
+
+The third Conv2D layer has 128 filters of size 3x3.
+
+MaxPooling2D: This is a pooling layer that reduces the spatial dimensions (height and width) of the feature maps after the convolutional layers. It helps in reducing the computational load and in making the model more robust.
+
+Each MaxPooling2D layer uses a 2x2 window, which reduces the size of the image by half in both dimensions.
+
+Flatten: This layer flattens the 3D output of the previous convolutional and pooling layers into a 1D vector. This is necessary before feeding the output into the fully connected Dense layers.
+
+Dense: These are fully connected layers.
+
+The first Dense layer has 128 neurons and uses the ReLU activation function.
+
+The final Dense layer has 10 neurons (corresponding to the 10 classes in CIFAR-10), with a softmax activation function to output a probability distribution over the 10 classes.
+
+Dropout: This layer randomly drops a percentage (50% in this case) of the neurons during training to prevent overfitting. It helps to generalize the model better.
