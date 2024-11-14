@@ -44,16 +44,26 @@ One-hot encoding: The labels (which are integers from 0 to 9) are converted into
 # Building the CNN model
 
 model = Sequential([
+
     Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
+    
     MaxPooling2D((2, 2)),
+    
     Conv2D(64, (3, 3), activation='relu'),
+    
     MaxPooling2D((2, 2)),
+    
     Conv2D(128, (3, 3), activation='relu'),
+    
     Flatten(),
+    
     Dense(128, activation='relu'),
+    
     Dropout(0.5),
+    
     Dense(10, activation='softmax')  # 10 classes for CIFAR-10
 ])
+
 Conv2D: This is a 2D convolutional layer. It learns filters (or kernels) that detect specific features (such as edges or textures) in the images.
 
 The first Conv2D layer has 32 filters of size 3x3, using the ReLU activation function. It expects input images of shape (32, 32, 3) (32x32 images with 3 color channels).
